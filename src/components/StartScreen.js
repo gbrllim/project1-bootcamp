@@ -19,7 +19,8 @@ export default class StartScreen extends React.Component {
               <p className="pb-4">
                 This is the ultimate place when investors can get up to date
                 live information across various sources Ready to begin your
-                journey?
+                journey? <br></br>How to make the most of Investronaut? Step 1:
+                Buy stonks Step 2: ???? Step 3: PROFIT!
               </p>
             </div>
             <div className="flex justify-center">
