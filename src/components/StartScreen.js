@@ -1,0 +1,37 @@
+import React from "react";
+import moneyPrinter from "../Icons/brr.gif";
+
+export default class StartScreen extends React.Component {
+  componentDidMount() {
+    document.getElementById("my_modal_1").close();
+    document.getElementById("my_modal_1").showModal();
+    console.log("test");
+  }
+
+  render() {
+    return (
+      <div className="">
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box bg-sky-900">
+            <img src={moneyPrinter} alt="brr" className="rounded-xl" />
+            <h3 className="mt-4 text-lg font-bold">Welcome to Investronaut!</h3>
+            <div className=" modal-action mt-5">
+              <p className="pb-4">
+                This is the ultimate place when investors can get up to date
+                live information across various sources Ready to begin your
+                journey?
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <form method="dialog">
+                <button className="btn bg-slate-400 text-slate-500 hover:bg-green-400 hover:text-slate-700">
+                  BULLISH
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </div>
+    );
+  }
+}

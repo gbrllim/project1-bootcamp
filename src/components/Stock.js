@@ -4,10 +4,10 @@ export default class Stock extends React.Component {
   render() {
     return (
       <div
-        className={`flex h-[160px] w-[160px] flex-col rounded-xl bg-white text-black hover:bg-slate-200 ${
+        className={`flex h-[160px] w-[160px] flex-col rounded-xl bg-white text-black shadow-md hover:bg-slate-200 ${
           this.props.priceChange >= 0
-            ? "bg-gradient-to-b from-green-500 to-green-300"
-            : "bg-gradient-to-b from-red-500 to-red-300"
+            ? "bg-gradient-to-t from-green-500 to-green-300"
+            : "bg-gradient-to-t from-red-500 to-red-300"
         }`}
       >
         <h1 className="p-3 pb-0 text-xl font-bold">{this.props.ticker}</h1>

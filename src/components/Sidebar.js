@@ -19,27 +19,20 @@ export default class SideBar extends React.Component {
           </div>
           <div className="drawer-side">
             <label htmlFor="my-drawer" className="drawer-overlay"></label>
-            <ul className=" menu bg-base-200 text-base-content min-h-full w-60 p-4 opacity-80 md:w-[400px]">
+            <ul className=" menu text-base-content min-h-full w-60 bg-slate-200 p-3 opacity-90 md:w-[400px]">
               {/* Sidebar content here */}
               <li>
-                <p>Customise</p>
+                <h2 className="text-slate-700">Add Widgets:</h2>
               </li>
               <li>
-                <h2>Input Stocks:</h2>
-                <div className="flex flex-row">
-                  <input type="text" className="left-0 right-0 w-3/5" />
-                  <button className="left-0 right-0 w-1/5">Input</button>
+                <div>
+                  <Pet />
                 </div>
               </li>
               <li>
-                <a>
-                  <Pet />
-                </a>
-              </li>
-              <li>
-                <a>
+                <div>
                   <Stock />
-                </a>
+                </div>
               </li>
             </ul>
           </div>

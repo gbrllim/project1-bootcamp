@@ -20,19 +20,13 @@ const WIDGET_LIST = [
   },
   {
     id: "c",
-    content: (
-      <Stock
-        ticker="ETH"
-        price="$1" //https://cryptoprices.cc/STETH/
-        priceChange="-4"
-      />
-    ),
+    content: <Stock ticker="ETH" price="$420" priceChange="-14" />,
     size: 1,
   },
   { id: "d", content: "News", size: 1 },
   { id: "f", content: <Pet />, size: 1 },
   { id: "e", content: "News", size: 1 },
-  { id: "h", content: "Notes", size: 1 },
+  { id: "h", content: "Notes", size: 2 },
   { id: "i", content: "Notes", size: 1 },
   { id: "j", content: "Clock", size: 1 },
 ];
@@ -40,7 +34,7 @@ const WIDGET_LIST = [
 function Widget({ content, onDragStart, onTouchStart }) {
   return (
     <div
-      className="flex h-1/4 min-h-[160px] w-1/4 min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
+      className="flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
       onDragStart={onDragStart}
       onTouchStart={onTouchStart}
       draggable
@@ -61,8 +55,8 @@ function WidgetContainer({
 }) {
   return (
     <div
+      //Style the grid border when dragged over
       style={
-        //style changed till widget is dropped
         isDraggedOver
           ? {
               border: "dashed 2px #abcdef",
@@ -112,7 +106,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-5 md:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
       {widgets.map((w, i) => (
         <WidgetContainer
           key={w.id}
