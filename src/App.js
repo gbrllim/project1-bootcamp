@@ -1,17 +1,29 @@
+//----------React----------//
 import React from "react";
-import logo from "./logo.png";
+
+//----------Pages----------//
+
+//----------Components----------//
+import SideBar from "./components/Sidebar";
+import Dashboard from "./components/Dashboard";
+//----------Styling----------//
 import "./App.css";
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+      <div className="flex min-h-screen flex-col bg-slate-100">
+        <header className="fixed top-0 flex w-full flex-row items-center justify-between bg-sky-800 p-2 text-center shadow-md">
+          <p className="text-transparent">BTC</p>
+          <h1 className="text-xl font-bold text-slate-100">Investronaut 🔭</h1>
+          <SideBar />
         </header>
+        <div className="mt-[80px] max-w-[1024px] self-center">
+          <Dashboard />
+        </div>
+        <footer className="fixed bottom-0 w-full bg-red-100 p-2 text-center shadow-md">
+          <p className="text-xs">Made by Gabriel Lim 🐷</p>
+        </footer>
       </div>
     );
   }
