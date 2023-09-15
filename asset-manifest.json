@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/project1-bootcamp/static/css/main.e7b5019a.css",
+    "main.js": "/project1-bootcamp/static/js/main.eb769f34.js",
+    "static/media/loop2.gif": "/project1-bootcamp/static/media/loop2.65ab31687631bb6c5445.gif",
+    "index.html": "/project1-bootcamp/index.html",
+    "main.e7b5019a.css.map": "/project1-bootcamp/static/css/main.e7b5019a.css.map",
+    "main.eb769f34.js.map": "/project1-bootcamp/static/js/main.eb769f34.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7b5019a.css",
+    "static/js/main.eb769f34.js"
+  ]
+}
