@@ -1,5 +1,6 @@
 import React from "react";
-import Message from "./Stock";
+import Pet from "./Pet";
+import Stock from "./Stock";
 
 export default class SideBar extends React.Component {
   render() {
@@ -11,7 +12,7 @@ export default class SideBar extends React.Component {
             {/* Page content here */}
             <label
               htmlFor="my-drawer"
-              className="btn btn-primary drawer-button border-none bg-slate-400 hover:bg-slate-600"
+              className="btn btn-primary drawer-button h-10 min-h-0 w-10 border-slate-300 bg-slate-500 p-0 hover:bg-slate-600"
             >
               ⚙️
             </label>
@@ -32,12 +33,12 @@ export default class SideBar extends React.Component {
               </li>
               <li>
                 <a>
-                  <Message />
+                  <Pet />
                 </a>
               </li>
               <li>
                 <a>
-                  <Message />
+                  <Stock />
                 </a>
               </li>
             </ul>

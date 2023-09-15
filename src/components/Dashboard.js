@@ -5,7 +5,9 @@ import React, { useState } from "react";
 import Stock from "./Stock";
 import Pet from "./Pet";
 
+//----------Widgets----------//
 const WIDGET_LIST = [
+  { id: "g", content: <Pet />, size: 1 },
   {
     id: "a",
     content: <Stock ticker="TSLA" price="$888" priceChange="42" />,
@@ -27,21 +29,22 @@ const WIDGET_LIST = [
     ),
     size: 1,
   },
-  { id: "d", content: "D", size: 1 },
-  { id: "e", content: "E", size: 1 },
-  { id: "f", content: "F", size: 1 },
-  { id: "h", content: "H", size: 1 },
-  { id: "i", content: "I", size: 1 },
-  { id: "j", content: "J", size: 1 },
-  { id: "g", content: <Pet />, size: 1 },
+  { id: "d", content: "News", size: 1 },
+  { id: "f", content: <Pet />, size: 1 },
+  { id: "e", content: "News", size: 1 },
+  { id: "h", content: "Notes", size: 1 },
+  { id: "i", content: "Notes", size: 1 },
+  { id: "j", content: "Clock", size: 1 },
 ];
-
-function Widget({ content, onDragStart }) {
+//----------Core Functions----------//
+function Widget({ content, onDragStart, onTouchStart }) {
   return (
     <div
       className="flex h-1/4 min-h-[160px] w-1/4 min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
       onDragStart={onDragStart}
+      onTouchStart={onTouchStart}
       draggable
+      onTouchMove={(e) => e.preventDefault()}
     >
       {content}
     </div>
@@ -85,15 +88,17 @@ export default function Dashboard() {
   const [draggedOverContainerId, setDraggedOverContainerId] = useState(null);
 
   const handleDragStart = (id) => setDraggedItemId(id);
+  const handleTouchStart = (id) => setDraggedItemId(id);
   const handleDragEntered = (id) => setDraggedOverContainerId(id);
   const handleDragLeave = () => setDraggedOverContainerId(null);
 
   const handleDrop = () => {
+    //Prevent refreshing if its dragged over its own container id
     if (!draggedOverContainerId) {
       clearState();
       return;
     }
-
+    //Update new item id
     const fromIndex = widgets.findIndex((w) => w.id === draggedItemId);
     const toIndex = widgets.findIndex((w) => w.id === draggedOverContainerId);
     setWidgets((w) => moveItem(w, fromIndex, toIndex));
@@ -120,6 +125,7 @@ export default function Dashboard() {
           <Widget
             content={w.content}
             onDragStart={() => handleDragStart(w.id)}
+            onTouchStart={() => handleTouchStart(w.id)}
           />
         </WidgetContainer>
       ))}
