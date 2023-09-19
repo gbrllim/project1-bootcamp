@@ -31,14 +31,12 @@ const WIDGET_LIST = [
   { id: "j", content: "Clock", size: 1 },
 ];
 //----------Core Functions----------//
-function Widget({ content, onDragStart, onTouchStart }) {
+function Widget({ content, onDragStart }) {
   return (
     <div
       className="flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
       onDragStart={onDragStart}
-      onTouchStart={onTouchStart}
       draggable
-      onTouchMove={(e) => e.preventDefault()}
     >
       {content}
     </div>
@@ -82,7 +80,6 @@ export default function Dashboard() {
   const [draggedOverContainerId, setDraggedOverContainerId] = useState(null);
 
   const handleDragStart = (id) => setDraggedItemId(id);
-  const handleTouchStart = (id) => setDraggedItemId(id);
   const handleDragEntered = (id) => setDraggedOverContainerId(id);
   const handleDragLeave = () => setDraggedOverContainerId(null);
 
@@ -119,7 +116,6 @@ export default function Dashboard() {
           <Widget
             content={w.content}
             onDragStart={() => handleDragStart(w.id)}
-            onTouchStart={() => handleTouchStart(w.id)}
           />
         </WidgetContainer>
       ))}
