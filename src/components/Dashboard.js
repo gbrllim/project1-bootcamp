@@ -1,40 +1,13 @@
 //----------React----------//
-import React, { useState } from "react";
+import React from "react"; //add usestate for functional
 
 //----------Components----------//
-import Stock from "./Stock";
-import Pet from "./Pet";
 
-//----------Widgets----------//
-const WIDGET_LIST = [
-  { id: "g", content: <Pet />, size: 1 },
-  {
-    id: "a",
-    content: <Stock ticker="TSLA" price="$888" priceChange="42" />,
-    size: 1,
-  },
-  {
-    id: "b",
-    content: <Stock ticker="MSFT" price="$288" priceChange="-4" />,
-    size: 1,
-  },
-  {
-    id: "c",
-    content: <Stock ticker="ETH" price="$420" priceChange="-14" />,
-    size: 1,
-  },
-  { id: "d", content: "News", size: 1 },
-  { id: "f", content: <Pet />, size: 1 },
-  { id: "e", content: "News", size: 1 },
-  { id: "h", content: "Notes", size: 2 },
-  { id: "i", content: "Notes", size: 1 },
-  { id: "j", content: "Clock", size: 1 },
-];
 //----------Core Functions----------//
 function Widget({ content, onDragStart }) {
   return (
     <div
-      className="flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
+      className=" flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
       onDragStart={onDragStart}
       draggable
     >
@@ -74,63 +47,107 @@ function WidgetContainer({
   );
 }
 
-export default function Dashboard() {
-  const [widgets, setWidgets] = useState(WIDGET_LIST);
-  const [draggedItemId, setDraggedItemId] = useState(null);
-  const [draggedOverContainerId, setDraggedOverContainerId] = useState(null);
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      widgets: props.widgets,
+      draggedItemId: null,
+      draggedOverContainerId: null,
+    };
+  }
 
-  const handleDragStart = (id) => setDraggedItemId(id);
-  const handleDragEntered = (id) => setDraggedOverContainerId(id);
-  const handleDragLeave = () => setDraggedOverContainerId(null);
+  handleDragStart = (id) => {
+    this.setState({ draggedItemId: id });
+  };
 
-  const handleDrop = () => {
-    //Prevent refreshing if its dragged over its own container id
+  handleDragEntered = (id) => {
+    this.setState({ draggedOverContainerId: id });
+  };
+
+  handleDragLeave = () => {
+    this.setState({ draggedOverContainerId: null });
+  };
+
+  handleDrop = (e) => {
+    const { draggedItemId, draggedOverContainerId, widgets } = this.state;
+
     if (!draggedOverContainerId) {
-      clearState();
+      this.clearState();
       return;
     }
-    //Update new item id
+    console.log("Initial widgets");
+    console.log(widgets);
     const fromIndex = widgets.findIndex((w) => w.id === draggedItemId);
     const toIndex = widgets.findIndex((w) => w.id === draggedOverContainerId);
-    setWidgets((w) => moveItem(w, fromIndex, toIndex));
+    const updatedWidgets = this.moveItem(widgets, fromIndex, toIndex);
+    console.log("fromIndex:" + fromIndex);
+    console.log("toIndex:" + toIndex);
+    console.log("draggedItemId:" + draggedItemId);
+    console.log("draggedOverContainerId:" + draggedOverContainerId);
+    console.log("updatedWidgets");
+    console.log(updatedWidgets);
 
-    clearState();
+    this.setState(
+      {
+        // widgets: updatedWidgets,
+      },
+      () => {
+        this.props.updateWidget(updatedWidgets);
+      },
+      () => {
+        this.clearState();
+      },
+    );
   };
 
-  const clearState = () => {
-    setDraggedItemId(null);
-    setDraggedOverContainerId(null);
+  clearState = () => {
+    this.setState({
+      draggedItemId: null,
+      draggedOverContainerId: null,
+    });
   };
 
-  return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
-      {widgets.map((w, i) => (
-        <WidgetContainer
-          key={w.id}
-          onDrop={handleDrop}
-          onDragEnter={() => handleDragEntered(w.id)}
-          onDragLeave={handleDragLeave}
-          isDraggedOver={w.id === draggedOverContainerId}
-          size={w.size}
-        >
-          <Widget
-            content={w.content}
-            onDragStart={() => handleDragStart(w.id)}
-          />
-        </WidgetContainer>
-      ))}
-    </div>
-  );
-}
+  moveItem = (list, from, to) => {
+    const listClone = [...list];
+    // if (from < to) {
+    //   listClone.splice(to + 1, 0, listClone[from]);
+    //   listClone.splice(from, 1);
+    // } else if (to < from) {
+    //   listClone.splice(to, 0, listClone[from]);
+    //   listClone.splice(from + 1, 1);
+    // }
+    console.log("listClone");
+    console.log(listClone);
+    const [itemToMove] = listClone.splice(from, 1);
+    listClone.splice(to, 0, itemToMove);
+    return listClone;
+  };
 
-function moveItem(list, from, to) {
-  const listClone = [...list];
-  if (from < to) {
-    listClone.splice(to + 1, 0, listClone[from]);
-    listClone.splice(from, 1);
-  } else if (to < from) {
-    listClone.splice(to, 0, listClone[from]);
-    listClone.splice(from + 1, 1);
+  render() {
+    const { draggedOverContainerId } = this.state;
+    const { widgets } = this.props;
+
+    return (
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
+        {widgets.map((w, Id) => (
+          <WidgetContainer
+            key={w.id}
+            onDrop={this.handleDrop}
+            onDragEnter={() => this.handleDragEntered(w.id)}
+            onDragLeave={this.handleDragLeave}
+            isDraggedOver={w.id === draggedOverContainerId}
+            size={w.size}
+          >
+            <Widget
+              content={w.content}
+              onDragStart={() => this.handleDragStart(w.id)}
+            />
+          </WidgetContainer>
+        ))}
+      </div>
+    );
   }
-  return listClone;
 }
+
+export default Dashboard;
