@@ -2,31 +2,44 @@
 import React, { useState } from "react";
 
 //----------Components----------//
-import Stock from "./Stock";
-import Pet from "./Pet";
+import Stock from "./widgets/Stock";
+import Pet from "./widgets/Pet";
+import Note from "./widgets/Note";
 
-//----------Widgets----------//
+//Main Widget List
 const WIDGET_LIST = [
   { id: "g", content: <Pet />, size: 1 },
   {
     id: "a",
-    content: <Stock ticker="TSLA" price="$888" priceChange="42" />,
+    content: (
+      <Stock ticker="TSLA" name="Tesla Inc" price="$1,337" priceChange="42" />
+    ),
     size: 1,
   },
   {
     id: "b",
-    content: <Stock ticker="MSFT" price="$288" priceChange="-4" />,
+    content: (
+      <Stock
+        ticker="MSFT"
+        name="Microsoft Corp"
+        price="$288"
+        priceChange="-4"
+      />
+    ),
     size: 1,
   },
   {
     id: "c",
-    content: <Stock ticker="ETH" price="$420" priceChange="-14" />,
+    content: (
+      <Stock ticker="ETH" name="Ethereum" price="$420" priceChange="-14" />
+    ),
     size: 1,
   },
+  { id: "h", content: <Note />, size: 1 },
   { id: "d", content: "News", size: 1 },
   { id: "f", content: <Pet />, size: 1 },
   { id: "e", content: "News", size: 1 },
-  { id: "h", content: "Notes", size: 2 },
+  { id: "k", content: "Youtube", size: 1 },
   { id: "i", content: "Notes", size: 1 },
   { id: "j", content: "Clock", size: 1 },
 ];
@@ -36,9 +49,8 @@ function Widget({ content, onDragStart, onTouchStart }) {
     <div
       className="flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
       onDragStart={onDragStart}
-      onTouchStart={onTouchStart}
+      // onTouchStart={onTouchStart}
       draggable
-      onTouchMove={(e) => e.preventDefault()}
     >
       {content}
     </div>
@@ -50,6 +62,8 @@ function WidgetContainer({
   children,
   onDragEnter,
   onDragLeave,
+  // onTouchMove,
+  // onTouchEnd,
   isDraggedOver,
   size,
 }) {
@@ -69,6 +83,8 @@ function WidgetContainer({
       onDrop={onDrop}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
+      // onTouchMove={onTouchMove}
+      // onTouchEnd={onDragLeave}
       onDragOver={(e) => e.preventDefault()}
     >
       {!isDraggedOver && children}
@@ -82,20 +98,45 @@ export default function Dashboard() {
   const [draggedOverContainerId, setDraggedOverContainerId] = useState(null);
 
   const handleDragStart = (id) => setDraggedItemId(id);
-  const handleTouchStart = (id) => setDraggedItemId(id);
+  // const handleTouchStart = (id) => setDraggedItemId(id);
   const handleDragEntered = (id) => setDraggedOverContainerId(id);
-  const handleDragLeave = () => setDraggedOverContainerId(null);
+  const handleDragLeave = () => setDraggedOverContainerId(null); //Reset Container Id to null after leaving
 
-  const handleDrop = () => {
+  const handleDrop = (e) => {
     //Prevent refreshing if its dragged over its own container id
     if (!draggedOverContainerId) {
       clearState();
       return;
     }
+    e.preventDefault();
+    const widgetType = e.dataTransfer.getData("widgetType");
+
+    let newWidget = null;
+    switch (widgetType) {
+      case "Stock":
+        newWidget = <Stock />;
+        break;
+      case "Pet":
+        newWidget = <Pet />;
+        break;
+      // Add cases for other widget types if needed
+      default:
+        break;
+    }
+
+    if (newWidget) {
+      // Add the new widget to the list of widgets
+      setWidgets((prevWidgets) => [...prevWidgets, newWidget]);
+    }
+
     //Update new item id
     const fromIndex = widgets.findIndex((w) => w.id === draggedItemId);
     const toIndex = widgets.findIndex((w) => w.id === draggedOverContainerId);
     setWidgets((w) => moveItem(w, fromIndex, toIndex));
+    console.log(draggedItemId);
+    console.log(draggedOverContainerId);
+    console.log(fromIndex);
+    console.log(toIndex);
 
     clearState();
   };
@@ -106,12 +147,14 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
-      {widgets.map((w, i) => (
+    <div className="grid grid-cols-2 gap-3 bg-red-100 md:grid-cols-4 lg:grid-cols-6">
+      {widgets.map((w, Id) => (
         <WidgetContainer
           key={w.id}
           onDrop={handleDrop}
           onDragEnter={() => handleDragEntered(w.id)}
+          // onTouchMove={() => handleDragEntered(w.id)}
+          // onTouchEnd={handleDragLeave}
           onDragLeave={handleDragLeave}
           isDraggedOver={w.id === draggedOverContainerId}
           size={w.size}
@@ -119,7 +162,7 @@ export default function Dashboard() {
           <Widget
             content={w.content}
             onDragStart={() => handleDragStart(w.id)}
-            onTouchStart={() => handleTouchStart(w.id)}
+            // onTouchStart={() => handleTouchStart(w.id)}
           />
         </WidgetContainer>
       ))}
@@ -129,12 +172,7 @@ export default function Dashboard() {
 
 function moveItem(list, from, to) {
   const listClone = [...list];
-  if (from < to) {
-    listClone.splice(to + 1, 0, listClone[from]);
-    listClone.splice(from, 1);
-  } else if (to < from) {
-    listClone.splice(to, 0, listClone[from]);
-    listClone.splice(from + 1, 1);
-  }
+  const [itemToMove] = listClone.splice(from, 1); // Remove the item to be moved
+  listClone.splice(to, 0, itemToMove); // Insert the item at the new position
   return listClone;
 }

@@ -5,22 +5,42 @@ import React from "react";
 
 //----------Components----------//
 import StartScreen from "./components/StartScreen";
+import SignUp from "./details/SignUp";
 import SideBar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 //----------Styling----------//
 import "./App.css";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showStartScreen: true,
+    };
+  }
+
+  toggleStartScreen = () => {
+    this.setState({
+      showStartScreen: !this.state.showStartScreen,
+    });
+    console.log("start scren");
+  };
+
   render() {
     return (
-      <div className="flex min-h-screen flex-col bg-slate-100">
-        <StartScreen />
-        <header className="fixed top-0 flex w-full flex-row items-center justify-between bg-sky-800 p-2 text-center shadow-md">
+      <div className="flex min-h-screen flex-col justify-center bg-[url('./Icons/background.png')] bg-contain bg-left-top pb-20">
+        {this.state.showStartScreen && <StartScreen />}
+        <header className="fixed top-0 flex w-full flex-row items-center justify-between bg-sky-800 p-2 shadow-md">
           <SideBar />
-          <h1 className="text-xl font-bold text-slate-100">Dashboard 🔭</h1>
-          <p className="text-transparent">BTC</p>
+          <button
+            onClick={this.toggleStartScreen}
+            className="text-xl font-bold text-slate-100"
+          >
+            Dashboard 🔭
+          </button>
+          <SignUp />
         </header>
-        <div className="mb-[40px] mt-[80px] max-w-[1024px] self-center">
+        <div className="mb-[40px] mt-[80px] self-center">
           <Dashboard />
         </div>
 
