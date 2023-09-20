@@ -1,12 +1,15 @@
 //----------React----------//
 import React from "react";
-
 //----------Widgets----------//
 import Stock from "./components/widgets/Stock";
 import Pet from "./components/widgets/Pet";
 import NoteList from "./components/widgets/NoteList";
 import AdBiquidity from "./components/widgets/AdBiquidity";
 import AdCharge from "./components/widgets/AdCharge";
+import MemoryGame from "./components/widgets/MemoryGame";
+import MarketData from "./components/widgets/MarketData";
+import Clock from "./components/widgets/Clock";
+
 //----------Components----------//
 import StartScreen from "./components/StartScreen";
 import SignUp from "./details/SignUp";
@@ -19,64 +22,62 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      timeZone: "Asia/Singapore",
       widgets: [
         { id: "a", content: <Pet />, size: 1 },
         {
           id: "b",
-          content: (
-            <Stock
-              ticker="TSLA"
-              name="Tesla Inc"
-              price="$1,337"
-              priceChange="42"
-            />
-          ),
+          content: <Stock ticker="TSLA" name="Tesla Inc" priceChange="42" />,
           size: 1,
         },
         {
           id: "c",
           content: (
-            <Stock
-              ticker="MSFT"
-              name="Microsoft Corp"
-              price="$288"
-              priceChange="-4"
-            />
+            <Stock ticker="MSFT" name="Microsoft Corp" priceChange="-4" />
           ),
           size: 1,
         },
         {
           id: "d",
-          content: (
-            <Stock
-              ticker="ETH"
-              name="Ethereum"
-              price="$420"
-              priceChange="-14"
-            />
-          ),
+          content: <Stock ticker="AAPL" name="Apple Inc" priceChange="-14" />,
           size: 1,
         },
         { id: "e", content: <NoteList />, size: 2 },
         { id: "f", content: <AdBiquidity />, size: 1 },
-        { id: "g", content: <Pet />, size: 1 },
+        { id: "g", content: <MarketData />, size: 1 },
         { id: "h", content: <AdCharge />, size: 1 },
-        { id: "i", content: "Youtube", size: 1 },
-        { id: "k", content: "Game", size: 1 },
-        { id: "l", content: "Clock", size: 1 },
+        {
+          id: "i",
+          content: (
+            <Clock
+              timeZone="Asia/Singapore"
+              onTimeZoneChange={this.handleTimeZoneChange}
+            />
+          ),
+          size: 1,
+        },
+        { id: "k", content: <MemoryGame />, size: 1 },
+        { id: "l", content: "UHH", size: 1 },
       ],
     };
   }
 
-  //Receive widgetType from SideBar.js and add newWidget to widgets
+  handleTimeZoneChange = (newTimeZone) => {
+    console.log(newTimeZone);
+    this.setState({ timeZone: newTimeZone });
+  };
+
+  //Add new widgets from sidebar - Receive widgetType from SideBar.js
   handleWidget = (widgetType) => {
+    console.log(widgetType);
     let newWidget;
-    if (widgetType === <NoteList />) {
+    if (widgetType === NoteList) {
       newWidget = {
         id: Math.floor(Math.random() * 100),
         content: widgetType,
         size: 2,
       };
+      console.log("workinggggg?");
     } else {
       newWidget = {
         id: Math.floor(Math.random() * 100),
@@ -88,7 +89,7 @@ class App extends React.Component {
       widgets: [newWidget, ...this.state.widgets],
     });
   };
-  //Receive updated widgets from Dashboard.js after swap and input back to Widgets
+  //Update swapped widgets - Receive updated objects from Dashboard.js
   updateWidget = (updatedWidgets) => {
     this.setState(
       {
@@ -99,7 +100,7 @@ class App extends React.Component {
       },
     );
   };
-  //Delete last widget in the list (To be improved)
+  //Delete last widget in widgets (To be improved)
   deleteWidget = () => {
     const removeWidget = [...this.state.widgets];
     removeWidget.pop();

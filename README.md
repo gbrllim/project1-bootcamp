@@ -15,19 +15,23 @@ Snappy, Swift and Specialised - Investronaut makes it easy for investors of all 
 Project Management:
 
 - Kanban Board - Notion
-- Basic wireframes - Figma
 - Component Structure - Eraser.io (https://app.eraser.io/workspace/iyHLPI391xQgHQyk1zLt?origin=share)
 
 # Core Features
 
 - Snap-to-grid Dashboard
+- Adding new widgets with sidebar
+
+Widgets:
+
 - Pet Widget
+- To-do Widget
+- Live stock price Widget
+- Market Data Widget
 
 # Future Enhancements
 
 - Customisable Widgets
-- Add new widgets with Sidebar
-- To-do Widget
 - News Widget
 - Youtube Widget
 
@@ -37,6 +41,8 @@ Project Management:
 - Astronaut Pet https://gifer.com/en/UUcK
 - Draggable widget layout without libraries https://www.fareez.info/blog/draggable-widget-layouts-using-reactjs/
 - Modal popup at launch (with componentDidMount()) https://stackoverflow.com/questions/74797095/why-am-i-unable-to-open-my-dialog-modally-in-javascript
+- Stock price API https://polygon.io/docs/stocks
+- Webscrapping in Javascript with Puppeteer https://www.freecodecamp.org/news/web-scraping-in-javascript-with-puppeteer/s
 
 # Available Scripts
 

@@ -16,6 +16,11 @@ export default class NoteList extends React.Component {
               upvoteCount: 1,
               content: "Check out Biquidity game!",
             },
+            {
+              id: 1,
+              upvoteCount: 2,
+              content: "Buy 100 Shares of AAPL at $8",
+            },
           ],
     };
   }
@@ -64,7 +69,7 @@ export default class NoteList extends React.Component {
     return (
       <div className="h-[160px] w-full overflow-scroll rounded-xl bg-yellow-300 text-black shadow-md ">
         <header className="flex flex-row rounded-t-xl bg-yellow-500">
-          <h1 className="w-full p-1 pl-3 text-sm font-bold">Notes</h1>
+          <h1 className="w-full p-1 pl-3 text-sm font-bold">Notepad</h1>
         </header>
         <section>
           {sorted.map((notes) => (

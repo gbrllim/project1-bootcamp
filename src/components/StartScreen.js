@@ -14,7 +14,7 @@ export default class StartScreen extends React.Component {
           className="btn h-12 border-0 bg-sky-900 text-xl font-bold normal-case text-slate-100 hover:animate-pulse hover:bg-sky-900 "
           onClick={() => document.getElementById("my_modal_1").showModal()}
         >
-          Dashboard 🔭
+          My Dashboard 🔭
         </button>
 
         <dialog id="my_modal_1" className="modal">

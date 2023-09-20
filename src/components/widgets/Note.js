@@ -7,9 +7,9 @@ export default class Note extends React.Component {
 
   render() {
     return (
-      <div className=" w-full rounded-xl bg-yellow-300 text-black shadow-md ">
-        <ul className="m-1 pl-1 text-sm transition delay-300 ease-in-out ">
-          <li className="flex items-center justify-between  hover:bg-yellow-400 ">
+      <div className=" w-full bg-yellow-300 text-black shadow-md ">
+        <ul>
+          <li className="flex items-center justify-between overflow-scroll pl-3 pr-3 pt-1 text-sm hover:bg-yellow-400">
             <div>
               <input
                 type="checkbox"

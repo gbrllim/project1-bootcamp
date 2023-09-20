@@ -1,71 +1,51 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Clock extends Component {
+export default class Clock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       time: new Date(),
     };
   }
+  tick() {
+    this.setState({
+      time: new Date(),
+    });
+  }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        time: new Date(),
-      });
-    }, 1000);
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    // Teardown setInterval timer with timer ID saved as class variable
+    clearInterval(this.timerId);
   }
 
-  renderHourMarkings() {
-    const hourMarkings = [];
-
-    for (let i = 1; i <= 12; i++) {
-      hourMarkings.push(
-        <div
-          key={i}
-          className="hour-marking"
-          style={{ transform: `rotate(${(i - 1) * 30}deg)` }}
-        >
-          {i}
-        </div>,
-      );
-    }
-
-    return hourMarkings;
-  }
+  handleTimeZoneSelection = (event) => {
+    const newTimeZone = event.target.value;
+    this.props.onTimeZoneChange(newTimeZone);
+  };
 
   render() {
-    const { time } = this.state;
-    const hours = time.getHours();
-    const minutes = time.getMinutes();
-    const seconds = time.getSeconds();
-
-    const secondDeg = (seconds / 60) * 360;
-    const minuteDeg = ((minutes + seconds / 60) / 60) * 360;
-    const hourDeg = (((hours % 12) + minuteDeg / 360) / 12) * 360;
-
     return (
-      <div className="AnalogClock">
-        <div
-          className="hand hour-hand"
-          style={{ transform: `rotate(${hourDeg}deg)` }}
-        ></div>
-        <div
-          className="hand minute-hand"
-          style={{ transform: `rotate(${minuteDeg}deg)` }}
-        ></div>
-        <div
-          className="hand second-hand"
-          style={{ transform: `rotate(${secondDeg}deg)` }}
-        ></div>
-        <div className="clock-face">{this.renderHourMarkings()}</div>
+      <div className="h-[160px] w-[160px] rounded-xl bg-purple-400 shadow-md">
+        <section>
+          {this.state.time.toLocaleTimeString("en-GB", {
+            timeZone: this.props.timeZone,
+          })}
+        </section>
+        <label htmlFor="time-zone"></label>
+        <select
+          name="time-zone"
+          id="time-zone"
+          onChange={this.handleTimeZoneSelection}
+        >
+          <option value="Asia/Singapore">Asia/Singapore</option>
+          <option value="Europe/London">Europe/London</option>
+          <option value="America/New_York">America/New_York</option>
+        </select>
       </div>
     );
   }
 }
-
-export default Clock;

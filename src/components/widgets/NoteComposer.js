@@ -37,7 +37,7 @@ export default class NoteComposer extends React.Component {
             className=" ml-3 mr-3 w-3/4 bg-transparent pl-3 text-xs hover:bg-yellow-400"
             type="text"
             name="content"
-            placeholder="Press enter to add new note"
+            placeholder="Enter to add new note"
             value={this.state.content}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}

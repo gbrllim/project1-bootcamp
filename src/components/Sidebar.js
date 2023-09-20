@@ -3,6 +3,7 @@ import Pet from "./widgets/Pet";
 import Stock from "./widgets/Stock";
 import ClearSettings from "../details/Clear Settings";
 import NoteList from "./widgets/NoteList";
+import note from "../Icons/note.png";
 
 export default class SideBar extends React.Component {
   render() {
@@ -40,7 +41,11 @@ export default class SideBar extends React.Component {
               </li>
               <li>
                 <div onClick={() => this.props.widget(<NoteList />)}>
-                  <NoteList />
+                  <img
+                    className="h-[160px] w-[160px] rounded-xl"
+                    src={note}
+                    alt="note"
+                  />
                 </div>
               </li>
               <li className="ml-4">
