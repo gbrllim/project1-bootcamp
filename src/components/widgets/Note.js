@@ -1,30 +1,34 @@
 import React from "react";
 
 export default class Note extends React.Component {
+  handleCheckboxChange = () => {
+    this.props.deleteNote(this.props.id);
+  };
+
   render() {
     return (
-      <div className="h-[160px] w-full rounded-xl bg-yellow-300 text-black shadow-md ">
-        <header className="flex flex-row rounded-t-xl bg-yellow-500">
-          <h1 className="w-full p-1 text-sm font-bold">Notes</h1>
-        </header>
-
-        <ul className="m-1 pl-1 text-sm">
-          <li className="m-1">
-            <input type="checkbox" className="mr-1" />
-            Make touch work!!!!
-          </li>
-          <li className="m-1">
-            <input
-              type="checkbox"
-              defaultChecked
-              className="mr-1 bg-slate-200"
-            />
-            Drag widgets from the sidebar
+      <div className=" w-full rounded-xl bg-yellow-300 text-black shadow-md ">
+        <ul className="m-1 pl-1 text-sm transition delay-300 ease-in-out ">
+          <li className="flex items-center justify-between  hover:bg-yellow-400 ">
+            <div>
+              <input
+                type="checkbox"
+                className="mr-1"
+                onChange={this.handleCheckboxChange}
+              />
+              <span>{this.props.content} </span>
+            </div>
+            <div>
+              <span className="mr-1">{this.props.upvoteCount}</span>
+              <button
+                className=""
+                onClick={() => this.props.upvote(this.props.id)}
+              >
+                ▲
+              </button>
+            </div>
           </li>
         </ul>
-        <footer className="relative">
-          <button className="">+</button>
-        </footer>
       </div>
     );
   }

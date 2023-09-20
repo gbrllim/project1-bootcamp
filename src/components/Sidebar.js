@@ -2,7 +2,7 @@ import React from "react";
 import Pet from "./widgets/Pet";
 import Stock from "./widgets/Stock";
 import ClearSettings from "../details/Clear Settings";
-import Note from "./widgets/Note";
+import NoteList from "./widgets/NoteList";
 
 export default class SideBar extends React.Component {
   render() {
@@ -39,8 +39,8 @@ export default class SideBar extends React.Component {
                 </div>
               </li>
               <li>
-                <div onClick={() => this.props.widget(<Note />)}>
-                  <Note />
+                <div onClick={() => this.props.widget(<NoteList />)}>
+                  <NoteList />
                 </div>
               </li>
               <li className="ml-4">

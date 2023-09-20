@@ -4,7 +4,7 @@ import React from "react";
 //----------Widgets----------//
 import Stock from "./components/widgets/Stock";
 import Pet from "./components/widgets/Pet";
-import Note from "./components/widgets/Note";
+import NoteList from "./components/widgets/NoteList";
 import AdBiquidity from "./components/widgets/AdBiquidity";
 import AdCharge from "./components/widgets/AdCharge";
 //----------Components----------//
@@ -57,7 +57,7 @@ class App extends React.Component {
           ),
           size: 1,
         },
-        { id: "e", content: <Note />, size: 2 },
+        { id: "e", content: <NoteList />, size: 2 },
         { id: "f", content: <AdBiquidity />, size: 1 },
         { id: "g", content: <Pet />, size: 1 },
         { id: "h", content: <AdCharge />, size: 1 },
@@ -70,12 +70,20 @@ class App extends React.Component {
 
   //Receive widgetType from SideBar.js and add newWidget to widgets
   handleWidget = (widgetType) => {
-    const newWidget = {
-      id: Math.floor(Math.random() * 100),
-      content: widgetType, // Assuming widgetType is a string
-      size: 1,
-    };
-
+    let newWidget;
+    if (widgetType === <NoteList />) {
+      newWidget = {
+        id: Math.floor(Math.random() * 100),
+        content: widgetType,
+        size: 2,
+      };
+    } else {
+      newWidget = {
+        id: Math.floor(Math.random() * 100),
+        content: widgetType,
+        size: 1,
+      };
+    }
     this.setState({
       widgets: [newWidget, ...this.state.widgets],
     });
