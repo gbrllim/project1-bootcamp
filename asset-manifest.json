@@ -1,14 +1,18 @@
 {
   "files": {
-    "main.css": "/project1-bootcamp/static/css/main.43b51d21.css",
-    "main.js": "/project1-bootcamp/static/js/main.e6602ffd.js",
+    "main.css": "/project1-bootcamp/static/css/main.fea26e72.css",
+    "main.js": "/project1-bootcamp/static/js/main.90cd95c4.js",
     "static/media/loop2.gif": "/project1-bootcamp/static/media/loop2.65ab31687631bb6c5445.gif",
+    "static/media/brr.gif": "/project1-bootcamp/static/media/brr.658f8d58121990380754.gif",
+    "static/media/background.png": "/project1-bootcamp/static/media/background.f1c5950b1e094a4403ab.png",
+    "static/media/charge.png": "/project1-bootcamp/static/media/charge.fffb4f840eb53a62df45.png",
+    "static/media/biquidity.png": "/project1-bootcamp/static/media/biquidity.483ddb0fb67e7027f7a6.png",
     "index.html": "/project1-bootcamp/index.html",
-    "main.43b51d21.css.map": "/project1-bootcamp/static/css/main.43b51d21.css.map",
-    "main.e6602ffd.js.map": "/project1-bootcamp/static/js/main.e6602ffd.js.map"
+    "main.fea26e72.css.map": "/project1-bootcamp/static/css/main.fea26e72.css.map",
+    "main.90cd95c4.js.map": "/project1-bootcamp/static/js/main.90cd95c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.43b51d21.css",
-    "static/js/main.e6602ffd.js"
+    "static/css/main.fea26e72.css",
+    "static/js/main.90cd95c4.js"
   ]
 }
