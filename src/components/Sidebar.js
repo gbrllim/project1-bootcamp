@@ -11,7 +11,7 @@ export default class SideBar extends React.Component {
         <div className="drawer">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
-            {/* Page content here */}
+            {/* Drawer Button Trigger */}
             <label
               htmlFor="my-drawer"
               className="btn btn-primary drawer-button h-12 min-h-0 w-[80px] border-0 bg-sky-900 p-0 text-xl hover:animate-pulse hover:bg-sky-900"
@@ -22,7 +22,7 @@ export default class SideBar extends React.Component {
           <div className="drawer-side">
             <label htmlFor="my-drawer" className="drawer-overlay"></label>
             <ul className=" menu min-h-full w-60 bg-slate-200 p-3 text-base-content opacity-90">
-              {/* Sidebar content here */}
+              {/* Sidebar content - add onClick for it to add to main dashboard */}
               <li>
                 <h2 className="text-slate-700 hover:bg-transparent">
                   Add Widgets:

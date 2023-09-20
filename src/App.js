@@ -5,6 +5,8 @@ import React from "react";
 import Stock from "./components/widgets/Stock";
 import Pet from "./components/widgets/Pet";
 import Note from "./components/widgets/Note";
+import AdBiquidity from "./components/widgets/AdBiquidity";
+import AdCharge from "./components/widgets/AdCharge";
 //----------Components----------//
 import StartScreen from "./components/StartScreen";
 import SignUp from "./details/SignUp";
@@ -18,21 +20,21 @@ class App extends React.Component {
     super(props);
     this.state = {
       widgets: [
-        { id: "g", content: <Pet />, size: 1 },
-        // {
-        //   id: "a",
-        //   content: (
-        //     <Stock
-        //       ticker="TSLA"
-        //       name="Tesla Inc"
-        //       price="$1,337"
-        //       priceChange="42"
-        //     />
-        //   ),
-        //   size: 1,
-        // },
+        { id: "a", content: <Pet />, size: 1 },
         {
           id: "b",
+          content: (
+            <Stock
+              ticker="TSLA"
+              name="Tesla Inc"
+              price="$1,337"
+              priceChange="42"
+            />
+          ),
+          size: 1,
+        },
+        {
+          id: "c",
           content: (
             <Stock
               ticker="MSFT"
@@ -43,52 +45,43 @@ class App extends React.Component {
           ),
           size: 1,
         },
-        // {
-        //   id: "c",
-        //   content: (
-        //     <Stock
-        //       ticker="ETH"
-        //       name="Ethereum"
-        //       price="$420"
-        //       priceChange="-14"
-        //     />
-        //   ),
-        //   size: 1,
-        // },
-        { id: "h", content: <Note />, size: 2 },
-        { id: "d", content: "News", size: 1 },
-        { id: "f", content: <Pet />, size: 1 },
-        { id: "e", content: "News", size: 1 },
-        // { id: "k", content: "Youtube", size: 1 },
-        // { id: "i", content: "Notes", size: 1 },
-        { id: "j", content: "Clock", size: 1 },
+        {
+          id: "d",
+          content: (
+            <Stock
+              ticker="ETH"
+              name="Ethereum"
+              price="$420"
+              priceChange="-14"
+            />
+          ),
+          size: 1,
+        },
+        { id: "e", content: <Note />, size: 2 },
+        { id: "f", content: <AdBiquidity />, size: 1 },
+        { id: "g", content: <Pet />, size: 1 },
+        { id: "h", content: <AdCharge />, size: 1 },
+        { id: "i", content: "Youtube", size: 1 },
+        { id: "k", content: "Game", size: 1 },
+        { id: "l", content: "Clock", size: 1 },
       ],
     };
   }
 
   //Receive widgetType from SideBar.js and add newWidget to widgets
   handleWidget = (widgetType) => {
-    console.log(widgetType);
-
     const newWidget = {
       id: Math.floor(Math.random() * 100),
       content: widgetType, // Assuming widgetType is a string
       size: 1,
     };
 
-    this.setState(
-      {
-        widgets: [newWidget, ...this.state.widgets],
-      },
-      () => {
-        console.log(newWidget);
-        console.log(this.state.widgets);
-      },
-    );
+    this.setState({
+      widgets: [newWidget, ...this.state.widgets],
+    });
   };
-
+  //Receive updated widgets from Dashboard.js after swap and input back to Widgets
   updateWidget = (updatedWidgets) => {
-    console.log(updatedWidgets);
     this.setState(
       {
         widgets: updatedWidgets,
@@ -97,6 +90,14 @@ class App extends React.Component {
         console.log("Final Widgets", this.state.widgets);
       },
     );
+  };
+  //Delete last widget in the list (To be improved)
+  deleteWidget = () => {
+    const removeWidget = [...this.state.widgets];
+    removeWidget.pop();
+    this.setState({
+      widgets: removeWidget,
+    });
   };
 
   render() {
@@ -114,8 +115,11 @@ class App extends React.Component {
           />
         </div>
 
-        <footer className="fixed bottom-0 w-full bg-sky-100 p-2 text-center shadow-md">
-          <p className="text-xs text-slate-700">Made by Gabriel Lim 🐷</p>
+        <footer className="fixed bottom-0 flex w-full flex-row justify-center bg-sky-100 p-2 shadow-md">
+          <p className="text-xs text-slate-700">Made by Gabriel Lim 🐷</p>{" "}
+          <button className=" pl-10 text-xs" onClick={this.deleteWidget}>
+            Delete
+          </button>
         </footer>
       </div>
     );

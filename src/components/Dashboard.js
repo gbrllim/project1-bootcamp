@@ -7,7 +7,7 @@ import React from "react"; //add usestate for functional
 function Widget({ content, onDragStart }) {
   return (
     <div
-      className=" flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl"
+      className=" flex h-1/4 min-h-[160px] w-auto min-w-[160px] items-center justify-center rounded-xl bg-slate-300 text-xl shadow-lg"
       onDragStart={onDragStart}
       draggable
     >
@@ -72,26 +72,22 @@ class Dashboard extends React.Component {
   handleDrop = (e) => {
     const { draggedItemId, draggedOverContainerId, widgets } = this.state;
 
-    if (!draggedOverContainerId) {
+    if (!draggedOverContainerId || draggedItemId === draggedOverContainerId) {
       this.clearState();
       return;
     }
-    console.log("Initial widgets");
-    console.log(widgets);
+    console.log("Initial widgets", widgets);
+    //Identify indexes to swap & run moveItem function to splice it
     const fromIndex = widgets.findIndex((w) => w.id === draggedItemId);
     const toIndex = widgets.findIndex((w) => w.id === draggedOverContainerId);
     const updatedWidgets = this.moveItem(widgets, fromIndex, toIndex);
-    console.log("fromIndex:" + fromIndex);
-    console.log("toIndex:" + toIndex);
-    console.log("draggedItemId:" + draggedItemId);
-    console.log("draggedOverContainerId:" + draggedOverContainerId);
-    console.log("updatedWidgets");
-    console.log(updatedWidgets);
+    console.log("fromIndex:", fromIndex);
+    console.log("toIndex:", toIndex);
+    console.log("draggedItemId:", draggedItemId);
+    console.log("draggedOverContainerId:", draggedOverContainerId);
+    console.log("updatedWidgets", updatedWidgets);
 
     this.setState(
-      {
-        // widgets: updatedWidgets,
-      },
       () => {
         this.props.updateWidget(updatedWidgets);
       },
@@ -108,17 +104,9 @@ class Dashboard extends React.Component {
     });
   };
 
+  // Function to swap items on widgets list
   moveItem = (list, from, to) => {
     const listClone = [...list];
-    // if (from < to) {
-    //   listClone.splice(to + 1, 0, listClone[from]);
-    //   listClone.splice(from, 1);
-    // } else if (to < from) {
-    //   listClone.splice(to, 0, listClone[from]);
-    //   listClone.splice(from + 1, 1);
-    // }
-    console.log("listClone");
-    console.log(listClone);
     const [itemToMove] = listClone.splice(from, 1);
     listClone.splice(to, 0, itemToMove);
     return listClone;
@@ -130,7 +118,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
-        {widgets.map((w, Id) => (
+        {widgets.map((w, i) => (
           <WidgetContainer
             key={w.id}
             onDrop={this.handleDrop}
