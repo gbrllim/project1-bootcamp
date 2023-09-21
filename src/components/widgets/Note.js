@@ -21,7 +21,7 @@ export default class Note extends React.Component {
             <div>
               <span className="mr-1">{this.props.upvoteCount}</span>
               <button
-                className=""
+                className="text-lg leading-none "
                 onClick={() => this.props.upvote(this.props.id)}
               >
                 ▲

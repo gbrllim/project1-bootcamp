@@ -1,8 +1,16 @@
+//----------React----------//
 import React from "react";
+
+//----------Details----------//
+import ClearSettings from "../details/Clear Settings";
+
+//----------Widgets----------//
 import Pet from "./widgets/Pet";
 import Stock from "./widgets/Stock";
-import ClearSettings from "../details/Clear Settings";
 import NoteList from "./widgets/NoteList";
+import Clock from "./widgets/Clock";
+
+//----------Icons----------//
 import note from "../Icons/note.png";
 
 export default class SideBar extends React.Component {
@@ -22,7 +30,7 @@ export default class SideBar extends React.Component {
           </div>
           <div className="drawer-side">
             <label htmlFor="my-drawer" className="drawer-overlay"></label>
-            <ul className=" menu min-h-full w-60 bg-slate-200 p-3 text-base-content opacity-90">
+            <ul className=" menu min-h-full w-60 bg-slate-200 p-3 pb-10 text-base-content opacity-90">
               {/* Sidebar content - add onClick for it to add to main dashboard */}
               <li>
                 <h2 className="text-slate-700 hover:bg-transparent">
@@ -46,6 +54,11 @@ export default class SideBar extends React.Component {
                     src={note}
                     alt="note"
                   />
+                </div>
+              </li>
+              <li>
+                <div onClick={() => this.props.widget(<Clock />)}>
+                  <Clock />
                 </div>
               </li>
               <li className="ml-4">

@@ -10,7 +10,7 @@ export default class MemoryGame extends Component {
       sequence: [],
       userSequence: [],
       score: 0,
-      highScore: 0,
+      highScore: 13,
       buttonDisabled: true,
       buttonStates: {
         button1: false,
@@ -126,38 +126,38 @@ export default class MemoryGame extends Component {
     return (
       <div className="h-[160px] w-[160px] rounded-xl bg-gradient-to-b from-sky-800 to-slate-600">
         <header className="text-xs text-white">
-          <h1 className="font-bold">
-            🧠 Memory Game <button onClick={this.startGame}>Start </button>
+          <h1 className="text-center font-bold">
+            🧠 Brain Train <button onClick={this.startGame}>🧠</button>
           </h1>
-          <p>
+          <p className="text-center">
             Score: {score} High Score: {highScore}
           </p>
         </header>
         <div className="button-container grid grid-cols-2 items-center justify-center gap-1 pl-3">
           {/* Render the 4 identical buttons */}
           <button
-            className={`h-[60px] w-[60px] bg-white ${
+            className={`h-[60px] w-[60px] rounded-md bg-white ${
               this.state.buttonStates.button1 ? "lit-button" : ""
             }`}
             onClick={() => this.handleButtonClick("button1")}
             disabled={this.state.buttonDisabled}
           ></button>
           <button
-            className={`h-[60px] w-[60px] bg-white ${
+            className={`h-[60px] w-[60px] rounded-md bg-white ${
               this.state.buttonStates.button2 ? "lit-button" : ""
             }`}
             onClick={() => this.handleButtonClick("button2")}
             disabled={this.state.buttonDisabled}
           ></button>
           <button
-            className={`h-[60px] w-[60px] bg-white ${
+            className={`h-[60px] w-[60px] rounded-md bg-white ${
               this.state.buttonStates.button3 ? "lit-button" : ""
             }`}
             onClick={() => this.handleButtonClick("button3")}
             disabled={this.state.buttonDisabled}
           ></button>
           <button
-            className={`h-[60px] w-[60px] bg-white ${
+            className={`h-[60px] w-[60px] rounded-md bg-white ${
               this.state.buttonStates.button4 ? "lit-button" : ""
             }`}
             onClick={() => this.handleButtonClick("button4")}

@@ -68,8 +68,8 @@ export default class Stock extends React.Component {
 }
 // Setting default value for props
 Stock.defaultProps = {
-  ticker: "BTC",
-  name: "Bitcoin",
+  ticker: "NVDA",
+  name: "NVIDIA Corp",
   price: "$100,000",
   priceChange: 10,
 };

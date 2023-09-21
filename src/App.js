@@ -24,6 +24,11 @@ class App extends React.Component {
     this.state = {
       timeZone: "Asia/Singapore",
       widgets: [
+        {
+          id: "i",
+          content: <Clock />,
+          size: 1,
+        },
         { id: "a", content: <Pet />, size: 1 },
         {
           id: "b",
@@ -37,35 +42,23 @@ class App extends React.Component {
           ),
           size: 1,
         },
+        { id: "e", content: <NoteList />, size: 2 },
+        { id: "g", content: <MarketData />, size: 1 },
         {
           id: "d",
           content: <Stock ticker="AAPL" name="Apple Inc" priceChange="-14" />,
           size: 1,
         },
-        { id: "e", content: <NoteList />, size: 2 },
+
         { id: "f", content: <AdBiquidity />, size: 1 },
-        { id: "g", content: <MarketData />, size: 1 },
+
         { id: "h", content: <AdCharge />, size: 1 },
-        {
-          id: "i",
-          content: (
-            <Clock
-              timeZone="Asia/Singapore"
-              onTimeZoneChange={this.handleTimeZoneChange}
-            />
-          ),
-          size: 1,
-        },
+
         { id: "k", content: <MemoryGame />, size: 1 },
-        { id: "l", content: "UHH", size: 1 },
+        { id: "l", content: <Pet />, size: 1 },
       ],
     };
   }
-
-  handleTimeZoneChange = (newTimeZone) => {
-    console.log(newTimeZone);
-    this.setState({ timeZone: newTimeZone });
-  };
 
   //Add new widgets from sidebar - Receive widgetType from SideBar.js
   handleWidget = (widgetType) => {

@@ -5,14 +5,19 @@ export default class NoteComposer extends React.Component {
     super(props);
 
     this.state = {
-      id: this.props.notesLength,
+      id: 1001, //this.props.notesLength,
       upvoteCount: 0,
       content: "",
     };
   }
 
   handleChange = (e) => {
-    this.setState({ content: e.target.value });
+    this.setState({ content: e.target.value, id: this.generateRandomId() });
+  };
+
+  generateRandomId = () => {
+    const newId = Math.floor(Math.random() * 10000);
+    return newId;
   };
 
   handleSubmit = (e) => {

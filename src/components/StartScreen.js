@@ -18,17 +18,25 @@ export default class StartScreen extends React.Component {
         </button>
 
         <dialog id="my_modal_1" className="modal">
-          <div className="modal-box bg-sky-900">
+          <div className="modal-box flex flex-col justify-center bg-sky-900">
             <img src={moneyPrinter} alt="brr" className="rounded-xl" />
-            <h3 className="mt-4 font-bold text-slate-100 first-letter:text-lg">
+            <h3 className=" mt-4 font-bold text-slate-100">
               Welcome to Investronaut!
             </h3>
-            <div className=" modal-action mt-5">
-              <p className="pb-4 text-slate-100">
-                This is the ultimate place when investors can get up to date
-                live information across various sources Ready to begin your
-                journey? <br></br>How to make the most of Investronaut? Step 1:
-                Buy stonks Step 2: ???? Step 3: PROFIT!
+            <div className=" modal-action mt-5 flex flex-col">
+              <p className="pb-1 text-slate-100">
+                Snappy, Swift and Specialised - Investronaut holds access to the
+                entire market in your pocket, making it easy for you to get
+                their daily dose of market updates in a glance!
+              </p>
+              <ul className="pb-1 text-slate-100">
+                <li>• Live information pulled from reliable sources</li>
+                <li>• Add new widgets from the sidebar</li>
+                <li>• Drag & Drop your dashboard</li>
+                <li>• Works on any platform</li>
+              </ul>
+              <p className="pb-1 font-bold text-slate-100">
+                Ready to begin your journey?
               </p>
             </div>
             <div className="flex justify-center">
