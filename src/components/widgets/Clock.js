@@ -31,7 +31,7 @@ export default class Clock extends React.Component {
   render() {
     return (
       <div className="flex h-[160px] w-[160px] flex-col items-center justify-center rounded-xl bg-purple-500 shadow-md">
-        <section className="pb-1 text-center text-[38px] font-bold text-white">
+        <section className="pb-1 text-center text-[32px] font-bold text-white">
           {this.state.time.toLocaleTimeString("en-GB", {
             timeZone: this.state.timeZone,
             hour12: true,
