@@ -61,7 +61,9 @@ export default class SideBar extends React.Component {
                   <Clock />
                 </div>
               </li>
+              {/* Add new Widgets here - make sure to add onClick */}
               <li className="ml-4">
+                {/* Clear local storage */}
                 <ClearSettings />
               </li>
             </ul>

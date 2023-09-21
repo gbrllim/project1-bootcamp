@@ -46,6 +46,7 @@ export default class Stock extends React.Component {
     const { ticker, name, priceChange } = this.props;
     return (
       <div
+        // conditional formatting based on price change %
         className={`flex h-[160px] w-[160px] flex-col rounded-xl bg-white text-black shadow-md hover:bg-slate-200 ${
           this.props.priceChange >= 0
             ? "bg-gradient-to-t from-green-500 to-green-300"
@@ -60,6 +61,7 @@ export default class Stock extends React.Component {
           </p>
         </p>
         <p className="pl-3 text-[18px]">
+          {/* Not working fully due to API limitations - price change is hardcoded */}
           {this.props.priceChange >= 0 ? "📈" : "📉"} {priceChange}%
         </p>
       </div>

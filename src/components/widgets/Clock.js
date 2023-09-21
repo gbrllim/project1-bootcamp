@@ -5,7 +5,7 @@ export default class Clock extends React.Component {
     super(props);
     this.state = {
       time: new Date(),
-      timeZone: "Asia/Singapore",
+      timeZone: "Asia/Singapore", //default timezone
     };
   }
   tick() {
@@ -19,7 +19,6 @@ export default class Clock extends React.Component {
   }
 
   componentWillUnmount() {
-    // Teardown setInterval timer with timer ID saved as class variable
     clearInterval(this.timerId);
   }
 

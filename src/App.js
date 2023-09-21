@@ -65,15 +65,15 @@ class App extends React.Component {
     console.log(widgetType);
     let newWidget;
     if (widgetType === NoteList) {
+      // ❌ Not working (Error: Undefined)
       newWidget = {
-        id: Math.floor(Math.random() * 100),
+        id: this.generateRandomId(),
         content: widgetType,
         size: 2,
       };
-      console.log("workinggggg?");
     } else {
       newWidget = {
-        id: Math.floor(Math.random() * 100),
+        id: this.generateRandomId(),
         content: widgetType,
         size: 1,
       };
@@ -82,6 +82,12 @@ class App extends React.Component {
       widgets: [newWidget, ...this.state.widgets],
     });
   };
+
+  generateRandomId = () => {
+    const newId = Math.floor(Math.random() * 10000);
+    return newId;
+  };
+
   //Update swapped widgets - Receive updated objects from Dashboard.js
   updateWidget = (updatedWidgets) => {
     this.setState(
@@ -93,6 +99,7 @@ class App extends React.Component {
       },
     );
   };
+
   //Delete last widget in widgets (To be improved)
   deleteWidget = () => {
     const removeWidget = [...this.state.widgets];

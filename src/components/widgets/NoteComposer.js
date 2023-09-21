@@ -5,7 +5,7 @@ export default class NoteComposer extends React.Component {
     super(props);
 
     this.state = {
-      id: 1001, //this.props.notesLength,
+      id: 10,
       upvoteCount: 0,
       content: "",
     };

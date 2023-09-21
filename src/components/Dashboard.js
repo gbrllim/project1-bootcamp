@@ -1,9 +1,6 @@
 //----------React----------//
-import React from "react"; //add usestate for functional
+import React from "react";
 
-//----------Components----------//
-
-//----------Core Functions----------//
 function Widget({ content, onDragStart }) {
   return (
     <div
