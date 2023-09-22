@@ -2,13 +2,13 @@
 import React from "react";
 
 //----------Details----------//
-import ClearSettings from "../details/Clear Settings";
+import ClearSettings from "../details/Clear Settings.js";
 
 //----------Widgets----------//
-import Pet from "./widgets/Pet";
-import Stock from "./widgets/Stock";
-import NoteList from "./widgets/NoteList";
-import Clock from "./widgets/Clock";
+import Pet from "./widgets/Pet.js";
+import Stock from "./widgets/Stock.js";
+import NoteList from "./widgets/NoteList.js";
+import Clock from "./widgets/Clock.js";
 
 //----------Icons----------//
 import note from "../Icons/note.png";
@@ -38,17 +38,17 @@ export default class SideBar extends React.Component {
                 </h2>
               </li>
               <li>
-                <div onClick={() => this.props.widget(<Pet />)}>
+                <div onClick={() => this.props.widget("Pet",<Pet />)}>
                   <Pet />
                 </div>
               </li>
               <li>
-                <div onClick={() => this.props.widget(<Stock />)}>
+                <div onClick={() => this.props.widget("Stock",<Stock />)}>
                   <Stock />
                 </div>
               </li>
               <li>
-                <div onClick={() => this.props.widget(<NoteList />)}>
+                <div onClick={() => this.props.widget("NoteList",<NoteList />)}>
                   <img
                     className="h-[160px] w-[160px] rounded-xl"
                     src={note}
@@ -57,7 +57,7 @@ export default class SideBar extends React.Component {
                 </div>
               </li>
               <li>
-                <div onClick={() => this.props.widget(<Clock />)}>
+                <div onClick={() => this.props.widget("Clock",<Clock />)}>
                   <Clock />
                 </div>
               </li>

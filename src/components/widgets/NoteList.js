@@ -1,6 +1,6 @@
 import React from "react";
-import Note from "./Note";
-import NoteComposer from "./NoteComposer";
+import Note from "./Note.js";
+import NoteComposer from "./NoteComposer.js";
 
 export default class NoteList extends React.Component {
   constructor(props) {

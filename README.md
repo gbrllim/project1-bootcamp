@@ -36,11 +36,7 @@ Project Management:
 
 # Outstanding Bugs
 
-- **App.js**: Ln 67. Unable to use IF statement to match with a component, sending <NotesList/> from SideBar.js. Unable to make a 2 span size notes widget when adding from the Side Bar.
-- **MarketData.js:** Webscrapper gives (Module not found: Error: Can't resolve 'fs' in '/Users/pichukaku/Documents/bootcamp/m1/project1-bootcamp/node_modules/@tootallnate/quickjs-emscripten/dist/generated') and (BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
-  This is no longer the case. Verify if you need this module and configure a polyfill for it.) errors when trying to import puppeteer
-- **MemoryGame.js:** Ln 73: lightButton function not working ( const buttonElement = document.getElementById(button); keeps returning undefined
-  )
+- **MarketData.js:** To replace webscrapper with Google Finance/Pulling data from google sheets
 
 # Future Enhancements
 

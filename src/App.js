@@ -1,20 +1,20 @@
 //----------React----------//
 import React from "react";
 //----------Widgets----------//
-import Stock from "./components/widgets/Stock";
-import Pet from "./components/widgets/Pet";
-import NoteList from "./components/widgets/NoteList";
-import AdBiquidity from "./components/widgets/AdBiquidity";
-import AdCharge from "./components/widgets/AdCharge";
-import MemoryGame from "./components/widgets/MemoryGame";
-import MarketData from "./components/widgets/MarketData";
-import Clock from "./components/widgets/Clock";
+import Stock from "./components/widgets/Stock.js";
+import Pet from "./components/widgets/Pet.js";
+import NoteList from "./components/widgets/NoteList.js";
+import AdBiquidity from "./components/widgets/AdBiquidity.js";
+import AdCharge from "./components/widgets/AdCharge.js";
+import MemoryGame from "./components/widgets/MemoryGame.js";
+import MarketData from "./components/widgets/MarketData.js";
+import Clock from "./components/widgets/Clock.js";
 
 //----------Components----------//
-import StartScreen from "./components/StartScreen";
-import SignUp from "./details/SignUp";
-import SideBar from "./components/Sidebar";
-import Dashboard from "./components/Dashboard";
+import StartScreen from "./components/StartScreen.js";
+import SignUp from "./details/SignUp.js";
+import SideBar from "./components/Sidebar.js";
+import Dashboard from "./components/Dashboard.js";
 //----------Styling----------//
 import "./App.css";
 
@@ -61,20 +61,19 @@ class App extends React.Component {
   }
 
   //Add new widgets from sidebar - Receive widgetType from SideBar.js
-  handleWidget = (widgetType) => {
+  handleWidget = (widgetType, widgetComponent) => {
     console.log(widgetType);
     let newWidget;
-    if (widgetType === NoteList) {
-      // ❌ Not working (Error: Undefined)
+    if (widgetType === "NoteList") {
       newWidget = {
         id: this.generateRandomId(),
-        content: widgetType,
+        content: widgetComponent,
         size: 2,
       };
     } else {
       newWidget = {
         id: this.generateRandomId(),
-        content: widgetType,
+        content: widgetComponent,
         size: 1,
       };
     }

@@ -5,13 +5,13 @@ import "./MemoryGame.css";
 export default class MemoryGame extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       sequence: [],
       userSequence: [],
       score: 0,
       highScore: 13,
       buttonDisabled: true,
+      message: "Press start to begin",
       buttonStates: {
         button1: false,
         button2: false,
@@ -28,6 +28,7 @@ export default class MemoryGame extends Component {
         sequence: [],
         userSequence: [],
         score: 0,
+        message: "Watch carefully",
       },
       () => {
         this.generateSequence();
@@ -39,8 +40,7 @@ export default class MemoryGame extends Component {
   generateSequence = () => {
     const newSequence = [...this.state.sequence];
     newSequence.push(this.getRandomButton());
-    console.log("newSquence", newSequence);
-    this.setState({ sequence: newSequence }, () => {
+    this.setState({ sequence: newSequence, message: "Watch carefully", }, () => {
       this.showSequence();
     });
   };
@@ -59,35 +59,32 @@ export default class MemoryGame extends Component {
     this.setState({ buttonDisabled: true }); // Disable buttons during the sequence
 
     const interval = setInterval(() => {
-      console.log(sequence[i]);
       this.lightButton(sequence[i]);
       i++;
       if (i >= sequence.length) {
         clearInterval(interval);
-        this.setState({ buttonDisabled: false }); // Enable buttons after the sequence
+         setTimeout(() => {
+        this.setState({ buttonDisabled: false, message: "Your Turn!" }); // Enable buttons after a 500ms delay
+      }, 1000);
       }
-    }, 1000);
+    }, 800);
   };
+
+  
 
   // Function to light up a button
   lightButton = (button) => {
-    // Get the button element by its ID or other unique identifier
-    const buttonElement = document.getElementById(button);
-    console.log("buttonElement", buttonElement);
-
-    if (buttonElement) {
       // Set the button's state to "lit"
       const buttonStates = { ...this.state.buttonStates };
       buttonStates[button] = true;
       this.setState({ buttonStates });
 
-      // Turn off the button after a delay (e.g., 500ms)
       setTimeout(() => {
         // Reset the button's state to not "lit"
         buttonStates[button] = false;
         this.setState({ buttonStates });
-      }, 500);
-    }
+      }, 400);
+    
   };
 
   // Function to handle button click
@@ -101,10 +98,20 @@ export default class MemoryGame extends Component {
     if (button === nextButton) {
       // Correct button pressed
       const newUserSequence = [...userSequence, button];
+      
+      //On click - light up for 200ms
+      const buttonStates = { ...this.state.buttonStates };
+      buttonStates[button] = true;
+      this.setState({ buttonStates });
+      setTimeout(() => {
+        // Reset the button's state to not "lit"
+        buttonStates[button] = false;
+        this.setState({ buttonStates });
+      }, 200);
 
       this.setState({ userSequence: newUserSequence }, () => {
         if (newUserSequence.length === sequence.length) {
-          // User completed the round
+          // User completed the round -> Add 1 round
           this.setState({ score: newUserSequence.length, userSequence: [] });
           if (newUserSequence.length >= highScore) {
             // Update high score if necessary
@@ -114,51 +121,56 @@ export default class MemoryGame extends Component {
         }
       });
     } else {
-      alert("Wrong Input! Game will be reset");
-      this.startGame();
-      // You can add code here to handle an incorrect button press (e.g., end the game)
+      this.setState({
+        message:"Wrong! Start to reset",
+        buttonDisabled: true, 
+      });
     }
   };
 
   render() {
     const { score, highScore, buttonDisabled } = this.state;
+  
 
     return (
-      <div className="h-[160px] w-[160px] rounded-xl bg-gradient-to-b from-sky-800 to-slate-600">
+      <div className="h-[160px] w-[160px] rounded-xl bg-gradient-to-b from-sky-800 to-slate-500">
         <header className="text-xs text-white">
-          <h1 className="text-center font-bold">
-            🧠 Brain Train <button onClick={this.startGame}>🧠</button>
+          <h1 className="text-center font-bold mt-1">
+             <button onClick={this.startGame}>🧠 Start 🧠</button>
           </h1>
           <p className="text-center">
-            Score: {score} High Score: {highScore}
+            Round: {score} High Score: {highScore}
           </p>
         </header>
-        <div className="button-container grid grid-cols-2 items-center justify-center gap-1 pl-3">
+        <message className="text-xs text-white text-center animate-pulse flex justify-center items-center ">
+          <p className="m-1.5 border-2 p-0 w-5/6">{this.state.message}</p>
+        </message>
+        <div className="button-container grid grid-cols-2 items-center justify-center gap-1 pl-1.5">
           {/* Render the 4 identical buttons */}
           <button
-            className={`h-[60px] w-[60px] rounded-md bg-white ${
-              this.state.buttonStates.button1 ? "lit-button" : ""
+            className={`h-[40px] w-[70px] rounded-md  ${
+              this.state.buttonStates.button1 ? "bg-green-400" : "bg-slate-300"
             }`}
             onClick={() => this.handleButtonClick("button1")}
             disabled={this.state.buttonDisabled}
           ></button>
           <button
-            className={`h-[60px] w-[60px] rounded-md bg-white ${
-              this.state.buttonStates.button2 ? "lit-button" : ""
+            className={`h-[40px] w-[70px] rounded-md  ${
+              this.state.buttonStates.button2 ? "bg-green-400" : "bg-slate-300"
             }`}
             onClick={() => this.handleButtonClick("button2")}
             disabled={this.state.buttonDisabled}
           ></button>
           <button
-            className={`h-[60px] w-[60px] rounded-md bg-white ${
-              this.state.buttonStates.button3 ? "lit-button" : ""
+            className={`h-[40px] w-[70px] rounded-md  ${
+              this.state.buttonStates.button3 ? "bg-green-400" : "bg-slate-300"
             }`}
             onClick={() => this.handleButtonClick("button3")}
             disabled={this.state.buttonDisabled}
           ></button>
           <button
-            className={`h-[60px] w-[60px] rounded-md bg-white ${
-              this.state.buttonStates.button4 ? "lit-button" : ""
+            className={`h-[40px] w-[70px] rounded-md  ${
+              this.state.buttonStates.button4 ? "bg-green-400" : "bg-slate-300"
             }`}
             onClick={() => this.handleButtonClick("button4")}
             disabled={this.state.buttonDisabled}
